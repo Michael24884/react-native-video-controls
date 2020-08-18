@@ -31,6 +31,7 @@ export default class VideoPlayer extends Component {
     volume: 1,
     title: '',
     rate: 1,
+
   };
 
   constructor(props) {
@@ -67,6 +68,7 @@ export default class VideoPlayer extends Component {
       currentTime: 0,
       error: false,
       duration: 0,
+
     };
 
     /**
@@ -97,6 +99,8 @@ export default class VideoPlayer extends Component {
       onLoad: this._onLoad.bind(this),
       onPause: this.props.onPause,
       onPlay: this.props.onPlay,
+      toggleCustomFullScreen: this.props.renderToggleFullScreen,
+
     };
 
     /**
@@ -107,6 +111,7 @@ export default class VideoPlayer extends Component {
       togglePlayPause: this._togglePlayPause.bind(this),
       toggleControls: this._toggleControls.bind(this),
       toggleTimer: this._toggleTimer.bind(this),
+      toggleCustomFullScreen: this._toggleCustomFullScreen.bind(this),
     };
 
     /**
@@ -484,6 +489,10 @@ export default class VideoPlayer extends Component {
     }
 
     this.setState(state);
+  }
+
+  _toggleCustomFullScreen() {
+    typeof this.events.toggleCustomFullScreen === "function" && this.events.toggleCustomFullScreen();
   }
 
   /**
@@ -932,6 +941,9 @@ export default class VideoPlayer extends Component {
     const fullscreenControl = this.props.disableFullscreen
       ? this.renderNullControl()
       : this.renderFullscreen();
+    const toggleFullScreen = this.props.toggleFullScreen
+      ? this.renderNullControl()
+      : this.renderToggleFullScreen();
 
     return (
       <Animated.View
@@ -951,6 +963,7 @@ export default class VideoPlayer extends Component {
             <View style={styles.controls.pullRight}>
               {volumeControl}
               {fullscreenControl}
+              {toggleFullScreen}
             </View>
           </SafeAreaView>
         </ImageBackground>
@@ -1008,6 +1021,22 @@ export default class VideoPlayer extends Component {
       <Image source={source} />,
       this.methods.toggleFullscreen,
       styles.controls.fullscreen,
+    );
+  }
+
+
+
+  /**
+   * Renders the fullscreen option to rotate device
+   */
+  renderToggleFullScreen() {
+    return this.renderControl(
+      <Image
+        source={require('./assets/img/expand.png')}
+        style={styles.controls.fullscreen}
+      />,
+      this.methods.toggleCustomFullScreen,
+      styles.controls.back,
     );
   }
 
