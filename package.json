@@ -24,7 +24,7 @@
   },
   "peerDependencies": {
     "react-native": ">=0.46.0",
-    "react-native-video": "^2.0.0"
+    "react-native-video": "^5.1.0-alpha8"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^0.0.5",
