@@ -941,6 +941,7 @@ export default class VideoPlayer extends Component {
     const fullscreenControl = this.props.disableFullscreen
       ? this.renderNullControl()
       : this.renderFullscreen();
+    const renderTitle = this.renderTitle();
 
     return (
       <Animated.View
@@ -957,6 +958,7 @@ export default class VideoPlayer extends Component {
           imageStyle={[styles.controls.vignette]}>
           <SafeAreaView style={styles.controls.topControlGroup}>
             {backControl}
+            {renderTitle}
             <View style={styles.controls.pullRight}>
               {volumeControl}
               {fullscreenControl}
@@ -1079,9 +1081,9 @@ export default class VideoPlayer extends Component {
           {seekbarControl}
           <SafeAreaView
             style={[styles.controls.row, styles.controls.bottomControlGroup]}>
-            <View style={{width: Dimensions.get("window").width / 3}}/>
+            <View style={{}}/>
 
-            {this.renderTitle()}
+            
             
             {timerControl}
           </SafeAreaView>
@@ -1155,7 +1157,7 @@ export default class VideoPlayer extends Component {
 
   renderForward() {
     return this.renderControl(
-      <Icon type={"MaterialCommunityIcons"} name={"fast-forward-10"} color={"white"} size={50}/>,
+      <Icon type={"MaterialCommunityIcons"} name={"fast-forward"} color={"white"} size={50}/>,
       this.methods.fastForward,
       styles.controls.playPause
     )
@@ -1163,7 +1165,7 @@ export default class VideoPlayer extends Component {
 
   renderRewind() {
     return this.renderControl(
-      <Icon type={"MaterialCommunityIcons"} name={"rewind-10"} color={"white"} size={50}/>,
+      <Icon type={"MaterialCommunityIcons"} name={"rewind"} color={"white"} size={50}/>,
       this.methods.fastRewind,
       styles.controls.playPause
     )
@@ -1373,8 +1375,8 @@ const styles = {
     center: {
       justifyContent: 'center',
       width: '100%',
-      
-      flex: 4,
+      marginTop: 25,
+      flex: 3,
       flexDirection: 'row',
       alignItems: 'center',  
     },
