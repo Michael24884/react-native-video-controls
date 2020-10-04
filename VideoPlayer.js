@@ -1042,9 +1042,9 @@ export default class VideoPlayer extends Component {
         ]}
       >
       <View style={{justifyContent: 'space-around', alignSelf: 'center', padding: 10, flexDirection: 'row'}}>
-//       {rewindFControl}
+
       {playPauseControl}
-//      {skipFControl}
+
       </View>
       </Animated.View>
 
